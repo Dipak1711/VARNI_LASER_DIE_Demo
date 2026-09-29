@@ -1,4 +1,4 @@
-import { Badge, Description } from '../components/RequestParts.jsx';
+import { Badge, Chips, RequestDialog, jobCode } from '../components/RequestParts.jsx';
 import { useMemo, useState } from 'react';
 import {
   ArrowUpDown, Calendar, CheckCircle2, ChevronRight, Clock, FileCode2, FileText, Filter, LayoutGrid, Mail, Scissors, Search, Table2,
@@ -23,7 +23,7 @@ function Card({ r, stage, dragging, onDragStart, onDragEnd, onMove }) {
     >
       <h4 className="p-name"><Mail size={14} /> {r.email}</h4>
       <div className="tags">
-        <span className="tag id">{r.id}</span>
+        <span className="tag id">{jobCode(r)}</span>
         <span className="tag purple">{r.material}</span>
         <span className="tag green">Qty {r.quantity}</span>
         <span className="tag blue">{r.approval}</span>
@@ -52,6 +52,7 @@ export default function DocumentProgress({ rows, moveToApproval }) {
   const [menu, setMenu] = useState(false);
   const [latestFirst, setLatestFirst] = useState(true);
   const [view, setView] = useState('card');
+  const [selected, setSelected] = useState(null);
 
   const materials = useMemo(() => ['All', ...new Set(rows.map((r) => r.material))], [rows]);
 
@@ -60,7 +61,7 @@ export default function DocumentProgress({ rows, moveToApproval }) {
     return rows
       .filter((r) => r.stage)
       .filter((r) => material === 'All' || r.material === material)
-      .filter((r) => !t || [r.id, r.email, r.material, r.cutting, r.file].some((v) => v.toLowerCase().includes(t)))
+      .filter((r) => !t || [jobCode(r), r.email, r.material, r.cutting, r.file].some((v) => v.toLowerCase().includes(t)))
       .sort((a, b) => (latestFirst ? num(b.id) - num(a.id) : num(a.id) - num(b.id)));
   }, [rows, q, material, latestFirst]);
 
@@ -95,7 +96,7 @@ export default function DocumentProgress({ rows, moveToApproval }) {
       <div className="card p-toolbar">
         <div className="p-search">
           <Search size={17} />
-          <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search by email, request ID, material…" />
+          <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search by email, job code, material…" />
         </div>
         <div className="pop-wrap">
           <button className="pill p-btn" onClick={() => setMenu((m) => !m)}>
@@ -120,17 +121,17 @@ export default function DocumentProgress({ rows, moveToApproval }) {
         <div className="card table-wrap">
           <table className="req-table">
             <thead>
-              <tr><th>User Email</th><th>Requirement Description</th><th>Request ID</th><th>Status</th></tr>
+              <tr><th>User Email</th><th>Requirement Description</th><th>Job Code</th><th>Status</th></tr>
             </thead>
             <tbody>
               {list.length === 0 && (
                 <tr><td colSpan={4} className="muted" style={{ textAlign: 'center', padding: 32 }}>No requests in Document Progress.</td></tr>
               )}
               {list.map((r) => (
-                <tr key={r.id}>
+                <tr key={r.id} className="click-row" onClick={() => setSelected(r.id)}>
                   <td>{r.email}</td>
-                  <td><Description r={r} /></td>
-                  <td className="req-id">{r.id}<div className="req-time">{r.received}</div></td>
+                  <td><Chips r={r} /></td>
+                  <td className="req-id">{jobCode(r)}<div className="req-time">{r.received}</div></td>
                   <td><Badge status={label(r)} /></td>
                 </tr>
               ))}
@@ -177,6 +178,10 @@ export default function DocumentProgress({ rows, moveToApproval }) {
         })}
       </div>
       )}
+      {selected && (() => {
+        const r = rows.find((x) => x.id === selected);
+        return r ? <RequestDialog r={r} status={label(r)} onClose={() => setSelected(null)} /> : null;
+      })()}
       <p className="p-footer">{list.length} requests · Document Progress pipeline</p>
     </>
   );
