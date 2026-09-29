@@ -203,3 +203,6 @@ h3{font-size:18px;font-weight:600;letter-spacing:-.02em}
 .p-col.drop-ready{border:1.5px dashed var(--green)}
 .p-col.drop-over{box-shadow:0 0 0 3px var(--green-soft)}
 @media (max-width:800px){.p-col{width:100%}.p-toolbar{flex-wrap:wrap}.p-search{flex-basis:100%}}
+.status.ready{background:var(--green-soft);color:var(--green-d)}
+.p-col-body{max-height:calc(100vh - 340px);overflow-y:auto}
+.p-footer{text-align:center;font-size:13px;color:var(--muted);margin-top:28px}

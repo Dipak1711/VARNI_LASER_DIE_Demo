@@ -1,6 +1,7 @@
+import { Badge, Description } from '../components/RequestParts.jsx';
 import { useMemo, useState } from 'react';
 import {
-  ArrowUpDown, Calendar, CheckCircle2, ChevronRight, Clock, FileCode2, FileText, Filter, Mail, Scissors, Search,
+  ArrowUpDown, Calendar, CheckCircle2, ChevronRight, Clock, FileCode2, FileText, Filter, LayoutGrid, Mail, Scissors, Search, Table2,
 } from 'lucide-react';
 
 const columns = [
@@ -50,17 +51,21 @@ export default function DocumentProgress({ rows, moveToApproval }) {
   const [material, setMaterial] = useState('All');
   const [menu, setMenu] = useState(false);
   const [latestFirst, setLatestFirst] = useState(true);
+  const [view, setView] = useState('card');
 
   const materials = useMemo(() => ['All', ...new Set(rows.map((r) => r.material))], [rows]);
 
-  const inStage = (stage) => {
+  const list = useMemo(() => {
     const t = q.trim().toLowerCase();
     return rows
-      .filter((r) => r.stage === stage)
+      .filter((r) => r.stage)
       .filter((r) => material === 'All' || r.material === material)
       .filter((r) => !t || [r.id, r.email, r.material, r.cutting, r.file].some((v) => v.toLowerCase().includes(t)))
       .sort((a, b) => (latestFirst ? num(b.id) - num(a.id) : num(a.id) - num(b.id)));
-  };
+  }, [rows, q, material, latestFirst]);
+
+  const inStage = (stage) => list.filter((r) => r.stage === stage);
+  const label = (r) => (r.stage === 'approval' ? 'Approval' : 'Ready');
 
   const drop = (e) => {
     e.preventDefault();
@@ -76,6 +81,14 @@ export default function DocumentProgress({ rows, moveToApproval }) {
         <div>
           <div className="eyebrow"><span /> WORKFLOW</div>
           <h1>Document Progress</h1>
+        </div>
+        <div className="view-toggle">
+          <button className={view === 'card' ? 'on' : ''} onClick={() => setView('card')}>
+            <LayoutGrid size={15} /> Card View
+          </button>
+          <button className={view === 'table' ? 'on' : ''} onClick={() => setView('table')}>
+            <Table2 size={15} /> Table View
+          </button>
         </div>
       </div>
 
@@ -103,6 +116,28 @@ export default function DocumentProgress({ rows, moveToApproval }) {
         </button>
       </div>
 
+      {view === 'table' ? (
+        <div className="card table-wrap">
+          <table className="req-table">
+            <thead>
+              <tr><th>User Email</th><th>Requirement Description</th><th>Request ID</th><th>Status</th></tr>
+            </thead>
+            <tbody>
+              {list.length === 0 && (
+                <tr><td colSpan={4} className="muted" style={{ textAlign: 'center', padding: 32 }}>No requests in Document Progress.</td></tr>
+              )}
+              {list.map((r) => (
+                <tr key={r.id}>
+                  <td>{r.email}</td>
+                  <td><Description r={r} /></td>
+                  <td className="req-id">{r.id}<div className="req-time">{r.received}</div></td>
+                  <td><Badge status={label(r)} /></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : (
       <div className="p-board">
         {columns.map((col) => {
           const items = inStage(col.id);
@@ -141,6 +176,8 @@ export default function DocumentProgress({ rows, moveToApproval }) {
           );
         })}
       </div>
+      )}
+      <p className="p-footer">{list.length} requests · Document Progress pipeline</p>
     </>
   );
 }
