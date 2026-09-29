@@ -4,18 +4,28 @@ ul{list-style:none}
 body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
 
 .app{
-  --bg:#f9fbf9;--surface:#fff;--border:#e0e4e6;--text:#0f1a12;--muted:#5f6b63;
-  --green:#5fba55;--green-d:#4aac3f;--green-soft:#daf6d6;--green-group:#ecf6ea;--green-chart:#6ebe64;--red:#bc3836;--red-soft:#ffeae6;
+  --sidebar:#fbfcfb;--bg:#f9fbf9;--surface:#fff;--border:#e0e4e6;--text:#0f1a12;--muted:#5f6b63;
+  --green:#30bc44;--green-d:#30bc44;--green-soft:#daf6d6;--green-group:#ecf6ea;--green-chart:#30bc44;--red:#bc3836;--red-soft:#ffeae6;
   --blue:#0068aa;--blue-soft:#ddf2ff;--shadow:0 1px 3px rgba(20,40,20,.05);
   display:flex;min-height:100vh;background:var(--bg);color:var(--text)
 }
 .app.dark{
-  --bg:#0f1512;--surface:#171f1a;--border:#26312a;--text:#eef4ef;--muted:#93a198;
-  --green-soft:#1d3322;--green-group:#1d3322;--red-soft:#3a1e1e;--blue-soft:#182b3f;--shadow:none
+  --sidebar:#0f1511;--bg:#0b100d;--surface:#131a15;--border:#223027;--text:#eef5ef;--muted:#96a89b;
+  --green:#30bc44;--green-d:#30bc44;--green-soft:rgba(95,186,84,.16);--green-group:rgba(95,186,84,.14);--green-chart:#30bc44;
+  --red:#ef6b68;--red-soft:rgba(239,107,104,.15);--blue:#5aaee8;--blue-soft:rgba(90,174,232,.15);--shadow:none
 }
+.app.dark .item:hover,.app.dark .icon-btn:hover,.app.dark .pill:hover,.app.dark .group-head:hover{background:rgba(95,186,84,.1)}
+.app.dark .item.active{color:#fff}
+.app.dark .tip{fill:#2a3a2f}.app.dark .bar-tip{background:#2a3a2f}
+.app.dark .badge-dot{border-color:var(--surface)}
+.app.dark .popover{box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.app.dark .stat:hover{box-shadow:0 6px 16px rgba(0,0,0,.4);border-color:#2f4536}
+.app.dark .eyebrow span{background:var(--green)}
+button:focus{outline:none}
+button:focus-visible{outline:2px solid var(--green);outline-offset:2px}
 
 /* sidebar */
-.sidebar{width:256px;flex-shrink:0;background:#fbfcfb;border-right:1px solid var(--border);
+.sidebar{width:256px;flex-shrink:0;background:var(--sidebar);border-right:1px solid var(--border);
   padding:16px;height:100vh;position:sticky;top:0;overflow-y:auto;transition:margin .25s}
 .sidebar.closed{margin-left:-256px}
 .brand{display:flex;align-items:center;gap:10px;cursor:pointer;margin:0 0 24px;height:48px}
@@ -52,7 +62,7 @@ body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;-webkit-font-smoothing
 .db-pill{padding:0 12px;font-size:12px;font-weight:600;gap:6px}
 .blue{color:#447dfc}.amber{color:#f09e0f}.dot{color:var(--muted)}.ok{color:var(--green-d)}
 .user-pill{display:flex;align-items:center;gap:10px;height:45px;padding:0 8px;border:1px solid var(--border);border-radius:23px}
-.avatar{width:32px;height:32px;border-radius:50%;background:#68c462;color:#fff;display:grid;place-items:center;font-weight:600;font-size:12px}
+.avatar{width:32px;height:32px;border-radius:50%;background:#30bc44;color:#fff;display:grid;place-items:center;font-weight:600;font-size:12px}
 .user-name{font-weight:600;font-size:13px;line-height:1.2}
 .user-phone{font-size:12px;color:var(--muted);line-height:1.2}
 .role{background:var(--green-soft);color:var(--green-d);padding:4px 10px;border-radius:14px;font-size:13px;font-weight:500}

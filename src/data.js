@@ -32,7 +32,7 @@ export const revenue = [
 ];
 
 export const customerStatus = [
-  { label: 'Active', value: 6857, color: '#6ebe64' },
+  { label: 'Active', value: 6857, color: '#5fba54' },
   { label: 'AMC', value: 0, color: '#3b82f6' },
   { label: 'Service', value: 0, color: '#f59e0b' },
   { label: 'Inactive', value: 0, color: '#9ca3af' },
