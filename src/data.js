@@ -1,4 +1,4 @@
-import { Users, ClipboardList, IndianRupee, Wrench, Sun, CheckCircle2, Clock, UserCheck, Workflow, LayoutGrid, LayoutDashboard, Mail } from 'lucide-react';
+import { Users, ClipboardList, IndianRupee, Wrench, Sun, CheckCircle2, Clock, UserCheck, Workflow, LayoutGrid, LayoutDashboard, Mail, FileClock } from 'lucide-react';
 
 export const menuGroups = [
   {
@@ -11,7 +11,8 @@ export const menuGroups = [
     id: 'workflow',
     label: 'Workflow',
     icon: Workflow,
-    items: [{ id: 'email-requests', label: 'Email Requests', icon: Mail }],
+    items: [{ id: 'email-requests', label: 'Email Requests', icon: Mail },
+      { id: 'document-progress', label: 'Document Progress', icon: FileClock }],
   },
 ];
 

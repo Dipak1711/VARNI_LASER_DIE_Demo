@@ -1,35 +1,13 @@
 import { useMemo, useState } from 'react';
-import { Check, FileCode2, LayoutGrid, Mail, Search, Table2, X } from 'lucide-react';
-import { emailRequests } from '../emailRequests.js';
+import { Check, LayoutGrid, Mail, Search, Table2, X } from 'lucide-react';
+import { Badge, Description } from '../components/RequestParts.jsx';
 
 const statuses = ['All', 'Pending', 'Approved', 'Rejected'];
 
-function Badge({ status }) {
-  return <span className={`status ${status.toLowerCase()}`}>{status}</span>;
-}
-
-function Description({ r }) {
-  return (
-    <div className="req-desc">
-      <div className="chips">
-        <span className="chip">{r.material}</span>
-        <span className="chip">{r.thickness}</span>
-        <span className="chip">Qty {r.quantity}</span>
-      </div>
-      <p>{r.cutting}</p>
-      <span className="file"><FileCode2 size={13} /> {r.file}</span>
-    </div>
-  );
-}
-
-export default function EmailRequests() {
-  const [rows, setRows] = useState(emailRequests);
+export default function EmailRequests({ rows, setApproval }) {
   const [view, setView] = useState('card');
   const [filter, setFilter] = useState('All');
   const [q, setQ] = useState('');
-
-  const setApproval = (id, approval) =>
-    setRows((rs) => rs.map((r) => (r.id === id ? { ...r, approval } : r)));
 
   const shown = useMemo(() => {
     const t = q.trim().toLowerCase();
@@ -46,6 +24,8 @@ export default function EmailRequests() {
         <button className="act ok" onClick={() => setApproval(r.id, 'Approved')}><Check size={14} /> Approve</button>
         <button className="act no" onClick={() => setApproval(r.id, 'Rejected')}><X size={14} /> Reject</button>
       </div>
+    ) : r.stage === 'approval' ? (
+      <span className="muted">In Approval</span>
     ) : (
       <button className="act reset" onClick={() => setApproval(r.id, 'Pending')}>Reset</button>
     );

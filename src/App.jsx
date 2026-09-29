@@ -3,6 +3,8 @@ import Sidebar from './components/Sidebar.jsx';
 import Header from './components/Header.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import EmailRequests from './pages/EmailRequests.jsx';
+import DocumentProgress from './pages/DocumentProgress.jsx';
+import { useRequests } from './store.js';
 import Placeholder from './pages/Placeholder.jsx';
 import { menuGroups } from './data.js';
 
@@ -12,6 +14,7 @@ export default function App() {
   const [page, setPage] = useState('dashboard');
   const [sidebar, setSidebar] = useState(true);
   const [dark, setDark] = useState(false);
+  const { requests, setApproval, moveToApproval } = useRequests();
   const [loggedOut, setLoggedOut] = useState(false);
 
   if (loggedOut) {
@@ -38,7 +41,9 @@ export default function App() {
           {page === 'dashboard' ? (
             <Dashboard onNavigate={setPage} />
           ) : page === 'email-requests' ? (
-            <EmailRequests />
+            <EmailRequests rows={requests} setApproval={setApproval} />
+          ) : page === 'document-progress' ? (
+            <DocumentProgress rows={requests} moveToApproval={moveToApproval} />
           ) : (
             <Placeholder title={titles[page] || page} />
           )}
