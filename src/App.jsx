@@ -5,6 +5,7 @@ import Dashboard from './pages/Dashboard.jsx';
 import EmailRequests from './pages/EmailRequests.jsx';
 import DocumentProgress from './pages/DocumentProgress.jsx';
 import { useRequests } from './store.js';
+import Laser from './pages/Laser.jsx';
 import Placeholder from './pages/Placeholder.jsx';
 import { menuGroups } from './data.js';
 
@@ -44,6 +45,8 @@ export default function App() {
             <EmailRequests rows={requests} setApproval={setApproval} />
           ) : page === 'document-progress' ? (
             <DocumentProgress rows={requests} moveToApproval={moveToApproval} />
+          ) : page === 'laser' ? (
+            <Laser />
           ) : (
             <Placeholder title={titles[page] || page} />
           )}

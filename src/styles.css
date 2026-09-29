@@ -221,3 +221,8 @@ h3{font-size:18px;font-weight:600;letter-spacing:-.02em}
 .status.ready{background:#fff3d6;color:#a86b00}
 .status.approval{background:var(--green-soft);color:var(--green-d)}
 .app.dark .status.ready{background:rgba(240,158,15,.16);color:#f0b040}
+.size-chip{font-size:13px;padding:3px 12px}
+.status.cnc{cursor:pointer;min-width:52px;text-align:center}
+.status.cnc.yes{background:var(--green-soft);color:var(--green-d)}
+.status.cnc.no{background:var(--red-soft);color:var(--red)}
+.status.cnc:hover{filter:brightness(.95)}
