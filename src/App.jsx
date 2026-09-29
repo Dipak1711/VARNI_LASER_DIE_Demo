@@ -16,7 +16,7 @@ const titles = Object.fromEntries(menuGroups.flatMap((g) => g.items).map((i) => 
 
 export default function App() {
   const [page, setPage] = useState('dashboard');
-  const [sidebar, setSidebar] = useState(true);
+  const [sidebar, setSidebar] = useState(() => window.innerWidth > 800);
   const [dark, setDark] = useState(false);
   const { requests, setApproval, moveToApproval } = useRequests();
   const { laser, toggleCnc } = useLaser();
@@ -34,10 +34,16 @@ export default function App() {
     );
   }
 
+  const navigate = (id) => {
+    setPage(id);
+    if (window.innerWidth <= 800) setSidebar(false);
+  };
+
   // sidebar highlight: invoice sub-pages keep "Invoice" title but no item highlight
   return (
     <div className={`app ${dark ? 'dark' : ''}`}>
-      <Sidebar active={page} onNavigate={setPage} open={sidebar} />
+      <Sidebar active={page} onNavigate={navigate} open={sidebar} />
+      {sidebar && <div className="sidebar-backdrop" onClick={() => setSidebar(false)} />}
       <div className="main">
         <Header
           onToggleSidebar={() => setSidebar((s) => !s)}
