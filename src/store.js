@@ -70,3 +70,10 @@ export function useFitting() {
   const saveFitting = (job, data) => setFitting((f) => ({ ...f, [job]: data }));
   return { fitting, saveFitting };
 }
+
+// QC records keyed by job code: { status, remark, photos: [dataUrl] }
+export function useQc() {
+  const [qc, setQc] = usePersisted('aris-erp-qc-v1', {});
+  const saveQc = (job, data) => setQc((q) => ({ ...q, [job]: data }));
+  return { qc, saveQc };
+}
