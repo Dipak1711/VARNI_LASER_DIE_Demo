@@ -11,8 +11,8 @@ export default function Sidebar({ active, onNavigate, open }) {
       <div className="brand" onClick={() => onNavigate('dashboard')}>
         <div className="brand-logo"><Leaf size={20} /></div>
         <div>
-          <div className="brand-name">Aris Solar</div>
-          <div className="brand-sub">ERP SUITE</div>
+          <div className="brand-name">VARNI</div>
+          <div className="brand-sub">LASER DIE</div>
         </div>
       </div>
 

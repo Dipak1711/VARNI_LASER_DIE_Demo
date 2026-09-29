@@ -32,8 +32,8 @@ export function buildChallanPdf({ job, c, qc, fit }) {
 
   // header band
   doc.setFillColor(...GREEN); doc.rect(0, 0, W, 30, 'F');
-  text('Aris Solar', M, 14, { bold: true, size: 20, color: [255, 255, 255] });
-  text('ERP SUITE', M, 20, { size: 8.5, color: [235, 250, 232] });
+  text('VARNI', M, 14, { bold: true, size: 20, color: [255, 255, 255] });
+  text('LASER DIE', M, 20, { size: 8.5, color: [235, 250, 232] });
   text('DELIVERY CHALLAN', R, 15, { bold: true, size: 17, color: [255, 255, 255], align: 'right' });
   text('Original for consignee', R, 21, { size: 8.5, color: [235, 250, 232], align: 'right' });
   y = 40;
