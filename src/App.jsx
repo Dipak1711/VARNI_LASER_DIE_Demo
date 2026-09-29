@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Sidebar from './components/Sidebar.jsx';
 import Header from './components/Header.jsx';
 import Dashboard from './pages/Dashboard.jsx';
+import EmailRequests from './pages/EmailRequests.jsx';
 import Placeholder from './pages/Placeholder.jsx';
 import { menuGroups } from './data.js';
 
@@ -36,6 +37,8 @@ export default function App() {
         <main className="content">
           {page === 'dashboard' ? (
             <Dashboard onNavigate={setPage} />
+          ) : page === 'email-requests' ? (
+            <EmailRequests />
           ) : (
             <Placeholder title={titles[page] || page} />
           )}
