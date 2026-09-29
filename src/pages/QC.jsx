@@ -217,7 +217,7 @@ export default function QC({ jobs, fitting, qc, saveQc }) {
       <div className="page-head">
         <div>
           <div className="eyebrow"><span /> WORKFLOW</div>
-          <h1>QC</h1>
+          <h1>Quality Assurance</h1>
           <p className="muted lead">Jobs with Bending &amp; Fitting completed. Click a row to add product photos, status and remark.</p>
         </div>
       </div>
@@ -282,7 +282,7 @@ export default function QC({ jobs, fitting, qc, saveQc }) {
           </tbody>
         </table>
       </div>
-      <p className="p-footer">{list.length} jobs in QC</p>
+      <p className="p-footer">{list.length} jobs in Quality Assurance</p>
 
       {selected && <QcDialog job={selected} data={qc[selected.job]} onSave={save} onClose={() => setOpen(null)} />}
     </>

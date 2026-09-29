@@ -7,7 +7,7 @@ import DocumentProgress from './pages/DocumentProgress.jsx';
 import BendingFitting from './pages/BendingFitting.jsx';
 import QC from './pages/QC.jsx';
 import Dispatch from './pages/Dispatch.jsx';
-import { useRequests, useLaser, useFitting, useQc } from './store.js';
+import { useRequests, useLaser, useFitting, useQc, useChallan } from './store.js';
 import Laser from './pages/Laser.jsx';
 import Placeholder from './pages/Placeholder.jsx';
 import { menuGroups } from './data.js';
@@ -22,6 +22,7 @@ export default function App() {
   const { laser, toggleCnc } = useLaser();
   const { fitting, saveFitting } = useFitting();
   const { qc, saveQc } = useQc();
+  const { challan, saveChallan } = useChallan();
   const [loggedOut, setLoggedOut] = useState(false);
 
   if (loggedOut) {
@@ -58,7 +59,7 @@ export default function App() {
           ) : page === 'qc' ? (
             <QC jobs={laser} fitting={fitting} qc={qc} saveQc={saveQc} />
           ) : page === 'dispatch' ? (
-            <Dispatch jobs={laser} fitting={fitting} qc={qc} />
+            <Dispatch jobs={laser} fitting={fitting} qc={qc} challan={challan} saveChallan={saveChallan} />
           ) : (
             <Placeholder title={titles[page] || page} />
           )}

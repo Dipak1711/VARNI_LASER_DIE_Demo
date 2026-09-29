@@ -77,3 +77,10 @@ export function useQc() {
   const saveQc = (job, data) => setQc((q) => ({ ...q, [job]: data }));
   return { qc, saveQc };
 }
+
+// Delivery challan per job code (one challan per job)
+export function useChallan() {
+  const [challan, setChallan] = usePersisted('aris-erp-challan-v1', {});
+  const saveChallan = (job, data) => setChallan((c) => ({ ...c, [job]: data }));
+  return { challan, saveChallan };
+}

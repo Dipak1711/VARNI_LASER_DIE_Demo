@@ -15,7 +15,7 @@ export const menuGroups = [
       { id: 'document-progress', label: 'Document Progress', icon: FileClock },
       { id: 'laser', label: 'Laser', icon: Zap },
       { id: 'bending-fitting', label: 'Bending & Fitting', icon: Hammer },
-      { id: 'qc', label: 'QC', icon: ShieldCheck },
+      { id: 'qc', label: 'Quality Assurance', icon: ShieldCheck },
       { id: 'dispatch', label: 'Dispatch', icon: Truck }],
   },
 ];

@@ -261,3 +261,11 @@ h3{font-size:18px;font-weight:600;letter-spacing:-.02em}
 .camera-actions .act{height:34px;padding:0 16px;font-size:13px}
 .camera-actions .act:disabled{opacity:.5;cursor:not-allowed}
 .camera-error{padding:24px 16px;background:var(--surface);color:var(--muted);font-size:13px;text-align:center;display:flex;flex-direction:column;gap:12px;align-items:center}
+
+/* pdf preview */
+.pdf-modal{max-width:860px;height:90vh;display:flex;flex-direction:column;padding:18px}
+.pdf-modal .modal-head{padding-bottom:12px}
+.pdf-modal .modal-head .act{height:34px;padding:0 14px;font-size:13px}
+.pdf-frame{flex:1;width:100%;margin-top:12px;border:1px solid var(--border);border-radius:10px;background:#fff}
+.print-btn{width:36px;height:36px}
+.print-btn:hover{background:var(--green-soft);color:var(--green-d);border-color:var(--green)}
