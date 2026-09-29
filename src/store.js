@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { emailRequests } from './emailRequests.js';
+import { laserJobs } from './laserJobs.js';
 
 const KEY = 'aris-erp-requests-v1';
 
@@ -39,4 +40,33 @@ export function useRequests() {
     );
 
   return { requests, setApproval, moveToApproval };
+}
+
+function usePersisted(key, initial) {
+  const [value, setValue] = useState(() => {
+    try {
+      const saved = JSON.parse(localStorage.getItem(key));
+      if (saved) return saved;
+    } catch { /* ignore */ }
+    return initial;
+  });
+  useEffect(() => {
+    try { localStorage.setItem(key, JSON.stringify(value)); } catch { /* ignore */ }
+  }, [key, value]);
+  return [value, setValue];
+}
+
+// Laser jobs (Sent CNC Document yes/no). Jobs with sentCnc = true flow into Bending & Fitting.
+export function useLaser() {
+  const [laser, setLaser] = usePersisted('aris-erp-laser-v1', laserJobs);
+  const toggleCnc = (job) =>
+    setLaser((rs) => rs.map((r) => (r.job === job ? { ...r, sentCnc: !r.sentCnc } : r)));
+  return { laser, toggleCnc };
+}
+
+// Bending & Fitting form data, keyed by job code (one record per job, so no duplicates).
+export function useFitting() {
+  const [fitting, setFitting] = usePersisted('aris-erp-fitting-v1', {});
+  const saveFitting = (job, data) => setFitting((f) => ({ ...f, [job]: data }));
+  return { fitting, saveFitting };
 }

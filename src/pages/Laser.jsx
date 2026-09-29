@@ -1,28 +1,14 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { ArrowUpDown, Filter, Search } from 'lucide-react';
-import { laserJobs, showSize } from '../laserJobs.js';
+import { showSize } from '../laserJobs.js';
 
-const KEY = 'aris-erp-laser-v1';
 const num = (j) => Number(j.split('-').pop());
 
-function load() {
-  try {
-    const saved = JSON.parse(localStorage.getItem(KEY));
-    if (Array.isArray(saved)) return saved;
-  } catch { /* ignore */ }
-  return laserJobs;
-}
-
-export default function Laser() {
-  const [rows, setRows] = useState(load);
+export default function Laser({ rows, toggle }) {
   const [q, setQ] = useState('');
   const [size, setSize] = useState('All');
   const [menu, setMenu] = useState(false);
   const [latestFirst, setLatestFirst] = useState(true);
-
-  useEffect(() => {
-    try { localStorage.setItem(KEY, JSON.stringify(rows)); } catch { /* ignore */ }
-  }, [rows]);
 
   const sizes = useMemo(() => ['All', ...new Set(rows.map((r) => r.size))], [rows]);
 
@@ -33,8 +19,6 @@ export default function Laser() {
       .filter((r) => !t || [r.job, r.email, showSize(r.size)].some((v) => v.toLowerCase().includes(t)))
       .sort((a, b) => (latestFirst ? num(b.job) - num(a.job) : num(a.job) - num(b.job)));
   }, [rows, q, size, latestFirst]);
-
-  const toggle = (job) => setRows((rs) => rs.map((r) => (r.job === job ? { ...r, sentCnc: !r.sentCnc } : r)));
 
   return (
     <>

@@ -4,7 +4,8 @@ import Header from './components/Header.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import EmailRequests from './pages/EmailRequests.jsx';
 import DocumentProgress from './pages/DocumentProgress.jsx';
-import { useRequests } from './store.js';
+import BendingFitting from './pages/BendingFitting.jsx';
+import { useRequests, useLaser, useFitting } from './store.js';
 import Laser from './pages/Laser.jsx';
 import Placeholder from './pages/Placeholder.jsx';
 import { menuGroups } from './data.js';
@@ -16,6 +17,8 @@ export default function App() {
   const [sidebar, setSidebar] = useState(true);
   const [dark, setDark] = useState(false);
   const { requests, setApproval, moveToApproval } = useRequests();
+  const { laser, toggleCnc } = useLaser();
+  const { fitting, saveFitting } = useFitting();
   const [loggedOut, setLoggedOut] = useState(false);
 
   if (loggedOut) {
@@ -46,7 +49,9 @@ export default function App() {
           ) : page === 'document-progress' ? (
             <DocumentProgress rows={requests} moveToApproval={moveToApproval} />
           ) : page === 'laser' ? (
-            <Laser />
+            <Laser rows={laser} toggle={toggleCnc} />
+          ) : page === 'bending-fitting' ? (
+            <BendingFitting jobs={laser} fitting={fitting} saveFitting={saveFitting} />
           ) : (
             <Placeholder title={titles[page] || page} />
           )}

@@ -226,3 +226,20 @@ h3{font-size:18px;font-weight:600;letter-spacing:-.02em}
 .status.cnc.yes{background:var(--green-soft);color:var(--green-d)}
 .status.cnc.no{background:var(--red-soft);color:var(--red)}
 .status.cnc:hover{filter:brightness(.95)}
+
+/* bending & fitting */
+.status.notstarted{background:var(--bg);color:var(--muted);border:1px solid var(--border)}
+.status.progress{background:#fff3d6;color:#a86b00}
+.status.completed{background:var(--green-soft);color:var(--green-d)}
+.app.dark .status.progress{background:rgba(240,158,15,.16);color:#f0b040}
+.wide-modal{max-width:640px}
+.form-section{margin:18px 0 10px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green-d)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field{display:flex;flex-direction:column;gap:5px;font-size:12px;color:var(--muted);font-weight:500}
+.field.wide{grid-column:1/-1}
+.field input,.field select,.field textarea{font:inherit;font-size:14px;color:var(--text);background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:9px 11px;outline:none;width:100%}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--green);box-shadow:0 0 0 3px var(--green-soft)}
+.field textarea{resize:vertical}
+.form-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:20px;padding-top:16px;border-top:1px solid var(--border)}
+.form-actions .act{height:36px;padding:0 18px;font-size:13px}
+@media (max-width:600px){.form-grid{grid-template-columns:1fr}}
