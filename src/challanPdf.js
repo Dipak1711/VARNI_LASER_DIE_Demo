@@ -1,7 +1,7 @@
 import { jsPDF } from 'jspdf';
 import { showSize } from './laserJobs.js';
 
-const GREEN = [95, 186, 84];
+const GREEN = [79, 70, 229];
 const fmtDate = (d) =>
   d ? new Date(d).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' }) : '—';
 
@@ -14,7 +14,7 @@ export function buildChallanPdf({ job, c, qc, fit }) {
   const text = (t, x, yy, opts = {}) => {
     doc.setFont('helvetica', opts.bold ? 'bold' : 'normal');
     doc.setFontSize(opts.size || 10);
-    doc.setTextColor(...(opts.color || [20, 30, 24]));
+    doc.setTextColor(...(opts.color || [15, 23, 42]));
     doc.text(String(t), x, yy, { align: opts.align, maxWidth: opts.maxWidth });
   };
   const need = (h) => { if (y + h > 280) { doc.addPage(); y = 20; } };
@@ -26,16 +26,16 @@ export function buildChallanPdf({ job, c, qc, fit }) {
     y += 7;
   };
   const pair = (label, value, x, yy) => {
-    text(label, x, yy, { size: 8.5, color: [110, 125, 115] });
+    text(label, x, yy, { size: 8.5, color: [100, 116, 139] });
     text(value || '—', x, yy + 4.5, { bold: true, size: 10, maxWidth: 80 });
   };
 
   // header band
   doc.setFillColor(...GREEN); doc.rect(0, 0, W, 30, 'F');
   text('VARNI', M, 14, { bold: true, size: 20, color: [255, 255, 255] });
-  text('LASER DIE', M, 20, { size: 8.5, color: [235, 250, 232] });
+  text('LASER DIE', M, 20, { size: 8.5, color: [224, 231, 255] });
   text('DELIVERY CHALLAN', R, 15, { bold: true, size: 17, color: [255, 255, 255], align: 'right' });
-  text('Original for consignee', R, 21, { size: 8.5, color: [235, 250, 232], align: 'right' });
+  text('Original for consignee', R, 21, { size: 8.5, color: [224, 231, 255], align: 'right' });
   y = 40;
 
   // challan meta
@@ -58,7 +58,7 @@ export function buildChallanPdf({ job, c, qc, fit }) {
   // item table
   section('Items');
   const cols = [M, M + 12, M + 100, M + 130, M + 155];
-  doc.setFillColor(240, 247, 239); doc.rect(M, y - 4.5, R - M, 8, 'F');
+  doc.setFillColor(238, 240, 255); doc.rect(M, y - 4.5, R - M, 8, 'F');
   ['#', 'Description', 'Size', 'Qty', 'QC Status'].forEach((h, i) => text(h, cols[i] + 1.5, y, { bold: true, size: 9 }));
   y += 8;
   text('1', cols[0] + 1.5, y);
@@ -67,7 +67,7 @@ export function buildChallanPdf({ job, c, qc, fit }) {
   text(`${c.quantity || '—'} pcs`, cols[3] + 1.5, y);
   text(qc?.status || '—', cols[4] + 1.5, y);
   y += 4;
-  doc.setDrawColor(210, 220, 212); doc.setLineWidth(0.2); doc.line(M, y, R, y);
+  doc.setDrawColor(221, 225, 236); doc.setLineWidth(0.2); doc.line(M, y, R, y);
   y += 4;
 
   // production details
@@ -89,7 +89,7 @@ export function buildChallanPdf({ job, c, qc, fit }) {
   pair('CNC document sent', job.sentCnc ? 'Yes' : 'No', M + 62, y);
   y += 13;
   if (qc?.remark) {
-    text('QC remark', M, y, { size: 8.5, color: [110, 125, 115] });
+    text('QC remark', M, y, { size: 8.5, color: [100, 116, 139] });
     y += 4.5;
     const lines = doc.splitTextToSize(qc.remark, R - M);
     text(lines, M, y);
@@ -97,7 +97,7 @@ export function buildChallanPdf({ job, c, qc, fit }) {
   }
   if (qc?.photos?.length) {
     need(48);
-    text('Product photos', M, y, { size: 8.5, color: [110, 125, 115] });
+    text('Product photos', M, y, { size: 8.5, color: [100, 116, 139] });
     y += 3;
     qc.photos.slice(0, 4).forEach((p, i) => {
       try { doc.addImage(p, 'JPEG', M + i * 45, y, 42, 32); } catch { /* skip bad image */ }

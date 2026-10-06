@@ -21,13 +21,13 @@ export const menuGroups = [
 ];
 
 export const stats = [
-  { icon: Users, tone: 'green', value: '6857', label: 'Total Customers', sub: '6857 active', go: 'dashboard' },
+  { icon: Users, tone: 'primary', value: '6857', label: 'Total Customers', sub: '6857 active', go: 'dashboard' },
   { icon: ClipboardList, tone: 'red', value: '9', label: 'Pending Tasks', sub: '6 overdue', go: 'dashboard' },
-  { icon: CheckCircle2, tone: 'blue', value: '178', label: 'Completed Tasks', sub: '95% completion rate', go: 'dashboard' },
-  { icon: Sun, tone: 'green', value: '28.95 MW', label: 'Capacity Installed', sub: '6857 installations', go: 'dashboard' },
-  { icon: IndianRupee, tone: 'green', value: '₹71.09Cr', label: 'Revenue Collected', sub: 'This month: ₹4.04Cr', badge: '73.8%', go: 'dashboard' },
+  { icon: CheckCircle2, tone: 'green', value: '178', label: 'Completed Tasks', sub: '95% completion rate', go: 'dashboard' },
+  { icon: Sun, tone: 'primary', value: '28.95 MW', label: 'Capacity Installed', sub: '6857 installations', go: 'dashboard' },
+  { icon: IndianRupee, tone: 'primary', value: '₹71.09Cr', label: 'Revenue Collected', sub: 'This month: ₹4.04Cr', badge: '73.8%', go: 'dashboard' },
   { icon: Clock, tone: 'red', value: '₹83.8L', label: 'Pending Payments', sub: '103 in progress', go: 'dashboard' },
-  { icon: Wrench, tone: 'green', value: '290', label: 'Active Installations', sub: 'On the installation floor', go: 'dashboard' },
+  { icon: Wrench, tone: 'primary', value: '290', label: 'Active Installations', sub: 'On the installation floor', go: 'dashboard' },
   { icon: UserCheck, tone: 'blue', value: '28', label: 'Team Members', sub: '5 field staff', go: 'dashboard' },
 ];
 
@@ -37,8 +37,8 @@ export const revenue = [
 ];
 
 export const customerStatus = [
-  { label: 'Active', value: 6857, color: '#5fba54' },
-  { label: 'AMC', value: 0, color: '#3b82f6' },
+  { label: 'Active', value: 6857, color: 'var(--primary)' },
+  { label: 'AMC', value: 0, color: '#0ea5e9' },
   { label: 'Service', value: 0, color: '#f59e0b' },
-  { label: 'Inactive', value: 0, color: '#9ca3af' },
+  { label: 'Inactive', value: 0, color: '#94a3b8' },
 ];

@@ -27,7 +27,7 @@ export default function Header({ onToggleSidebar, dark, onToggleDark, onLogout }
       <div className="header-right">
         <div className="pop-wrap">
           <button className="pill db-pill" onClick={() => { setDbOpen((o) => !o); setNotifOpen(false); }}>
-            <Database size={14} color="#5fba54" />
+            <Database size={14} style={{ color: 'var(--primary)' }} />
             <span className="blue">46R</span>
             <span className="dot">·</span>
             <span className="amber">1W</span>

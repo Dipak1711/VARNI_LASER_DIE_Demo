@@ -34,8 +34,8 @@ export default function RevenueChart() {
       <svg viewBox={`0 0 ${W} ${H}`} className="chart" onMouseLeave={() => setHover(null)}>
         <defs>
           <linearGradient id="fillG" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#5fba54" stopOpacity="0.25" />
-            <stop offset="100%" stopColor="#5fba54" stopOpacity="0.02" />
+            <stop offset="0%" style={{ stopColor: 'var(--primary)' }} stopOpacity="0.25" />
+            <stop offset="100%" style={{ stopColor: 'var(--primary)' }} stopOpacity="0.02" />
           </linearGradient>
         </defs>
         {ticks.map((t) => (
@@ -45,7 +45,7 @@ export default function RevenueChart() {
           </g>
         ))}
         <path d={area} fill="url(#fillG)" />
-        <path d={line} fill="none" stroke="#5fba54" strokeWidth="3" strokeLinecap="round" />
+        <path d={line} fill="none" style={{ stroke: 'var(--primary)' }} strokeWidth="3" strokeLinecap="round" />
         {revenue.map((r, i) => (
           <g key={r.m} onMouseEnter={() => setHover(i)}>
             <rect x={x(i) - 40} y={PAD.t} width="80" height={H - PAD.t - PAD.b} fill="transparent" />
@@ -53,7 +53,7 @@ export default function RevenueChart() {
             {hover === i && (
               <>
                 <line x1={x(i)} x2={x(i)} y1={PAD.t} y2={H - PAD.b} className="hover-line" />
-                <circle cx={x(i)} cy={y(r.v)} r="6" fill="var(--surface)" stroke="#5fba54" strokeWidth="3" />
+                <circle cx={x(i)} cy={y(r.v)} r="6" fill="var(--surface)" style={{ stroke: 'var(--primary)' }} strokeWidth="3" />
                 <g transform={`translate(${Math.min(x(i) - 45, W - 110)},${y(r.v) - 46})`}>
                   <rect width="90" height="34" rx="8" className="tip" />
                   <text x="45" y="21" textAnchor="middle" className="tip-text">₹{r.v}L</text>
